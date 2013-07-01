@@ -13,7 +13,7 @@ $(function(){
         }
         socket.emit('save', {name:selectedFile.name, size:selectedFile.size});
       } else {
-        alert("Выберите файл");
+        alert("Select file");
       }
     })
 
@@ -21,21 +21,21 @@ $(function(){
       selectedFile = e.target.files[0];
     });
   } else {
-    $('#uploadarea').text('Ваш браузер не поддерживает File API');
+    $('#uploadarea').text('Your browser does not support File API');
   }
 })
 
 socket.on('url', function (d){
   token = d.token;
   var link = 'http://'+window.location.hostname+(location.port?':'+location.port:'')+'/get/'+d.token;
-  $('#uploadarea').html('<span>Ссылка на скачивание файла: <a href="'+link+'" target="_blank">'+link+'</a></span>');
+  $('#uploadarea').html('<span>Link to download file: <a href="'+link+'" target="_blank">'+link+'</a></span>');
 });
 
 socket.on('start', function (d){
   if (token == d.token) {
     $('#uploadarea')
       .empty()
-      .append($('<span/>').attr('id','NameArea').text('Отправка '+selectedFile.name))
+      .append($('<span/>').attr('id','NameArea').text('Sending '+selectedFile.name))
       .append($('<div/>').attr('id','progressContainer').append($('<div/>').attr('id','progressBar')))
       .append($('<span/>').attr('id','percent').text('0%'))
       .append('<span id="Uploaded"> - <span id="MB">0</span>/'+Math.round(selectedFile.size/1048576)+'MB</span>');
@@ -54,7 +54,7 @@ socket.on('moreData', function (d){
 });
 
 socket.on('done', function (d){
-  $('#uploadarea').html("Файл передан. <button type='button' name='upload' value='' id='restart' class='btn'>Отправить еще</button>")
+  $('#uploadarea').html("File is sent. <button type='button' name='upload' value='' id='restart' class='btn'>Send more</button>")
   $('#restart').css('left','20px').click(function(){
     location.reload(true);
   });

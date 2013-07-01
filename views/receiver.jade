@@ -1,12 +1,12 @@
 doctype 5
 html
   head
-    title Получатель :: Отправка файла без сохранения на сервер.
+    title Receiver :: Sending file without saving on the server.
     link(rel='stylesheet', href='/css/style.css')
   body
     #uploadbox
       if (name)
-        h2 Получение файла:
-        a(href='/file/get/#{token}') Загрузить файл !{name}
+        h2 Receiving file:
+        a(href='/file/get/#{token}') Download file !{name}
       else
-        h2 Файл не найден...
+        h2 File not found...
