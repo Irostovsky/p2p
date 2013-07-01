@@ -2,7 +2,7 @@ var express = require('express')
   , stylus = require('stylus')
   , crypto = require('crypto')
   , app = express()
-  , server = app.listen(8080)
+  , server = app.listen(8887)
   , io = require('socket.io').listen(server)
   , files = {};
 
@@ -36,8 +36,8 @@ app.get('/file/get/:secure', function(req, res){
         res.write(files[req.params.secure].data, 'binary');
         files[req.params.secure].data = '';
       }
-      if (files[req.params.secure].isLoaded) {  
-        res.end(); 
+      if (files[req.params.secure].isLoaded) {
+        res.end();
         clearInterval(intervalID);
         delete files[req.params.secure];
       }
@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('upload', function (d){
     files[d.token].downloaded += d.data.length;
     files[d.token].data += d.data;
-    
+
     if(files[d.token].downloaded == files[d.token].fileSize) {
       files[d.token].isLoaded = true;
       socket.emit('done', {name:files.name});

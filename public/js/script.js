@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080/');
+var socket = io.connect('http://localhost:8887/');
 var FReader, token, selectedFile;
 
 $(function(){
@@ -45,7 +45,7 @@ socket.on('moreData', function (d){
     updateBar(d.percent);
     var place = d.place * 524288
       , newFile;
-    selectedFile.slice = selectedFile.slice || selectedFile.mozSlice;
+    selectedFile.slice = selectedFile.slice || selectedFile.mozSlice || selectedFile.webkitSlice;
     newFile = selectedFile.slice(place, place + Math.min(524288, (selectedFile.size-place)));
     FReader.readAsBinaryString(newFile);
   }
