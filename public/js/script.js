@@ -1,8 +1,10 @@
-var socket = io.connect('http://localhost:8887/');
+
+var socket = io.connect($('.config').attr('socketUrl'));
 var FReader, token, selectedFile;
 
+
 $(function(){
-  if(window.File && window.FileReader){ 
+  if(window.File && window.FileReader){
     $('#uploadbutton').click(function(){
       if($('#filebox').val() != "") {
         FReader = new FileReader();

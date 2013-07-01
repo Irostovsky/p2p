@@ -1,8 +1,10 @@
+
 var express = require('express')
   , stylus = require('stylus')
   , crypto = require('crypto')
   , app = express()
-  , server = app.listen(8887)
+  , config = require('config')
+  , server = app.listen(config.server.port)
   , io = require('socket.io').listen(server)
   , files = {};
 
@@ -10,7 +12,7 @@ app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  res.render('sender', {});
+  res.render('sender', {socketUrl: 'http://' + config.server.host + ':' + config.server.port});
 });
 
 

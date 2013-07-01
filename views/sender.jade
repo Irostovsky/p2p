@@ -12,6 +12,8 @@ html
         br
         button#uploadbutton.btn(type='button') Отправить
 
+
     script(src='//code.jquery.com/jquery-1.9.1.min.js')
     script(src='/socket.io/socket.io.js')
+    div.config(socketUrl='#{socketUrl}')
     script(src='/js/script.js')
