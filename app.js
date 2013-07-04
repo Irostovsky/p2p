@@ -30,7 +30,7 @@ app.get('/file/get/:secure', function(req, res){
     io.sockets.emit('start', {token:req.params.secure});
     io.sockets.emit('moreData', {place:0, percent:0, token:req.params.secure});
 
-    res.setHeader('Content-disposition', 'attachment; filename=' + files[req.params.secure].name);
+    res.setHeader('Content-disposition', 'attachment; filename="' + files[req.params.secure].name + '"');
     res.setHeader('Content-Length', files[req.params.secure].fileSize);
 
     var intervalID = setInterval(function(){
