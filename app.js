@@ -62,7 +62,7 @@ io.sockets.on('connection', function (socket) {
         downloaded: 0,
         isLoaded: false
       };
-      socket.emit('url', {token:token});
+      socket.emit('url', {token:token, name: d.name});
     });
   });
 
